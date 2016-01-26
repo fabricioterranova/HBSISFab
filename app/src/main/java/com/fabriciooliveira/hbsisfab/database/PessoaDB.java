@@ -35,7 +35,10 @@ public class PessoaDB extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        onCreate(db);
+
+        if (newVersion > oldVersion) {
+            db.execSQL("ALTER TABLE TB_PESSOA ADD COLUMN ativo INTEGER DEFAULT 0");
+        }
     }
 
 
