@@ -20,6 +20,8 @@ public class Pessoa implements Parcelable {
     @SerializedName("dataNascimento")
     private String dataNascimento;
 
+    private boolean ativo;
+
     public Pessoa() {
 
     }
@@ -30,11 +32,12 @@ public class Pessoa implements Parcelable {
         this.dataNascimento = dataNascimento;
     }
 
-    public Pessoa(int id, String nome, String sobrenome, String dataNascimento, int ativo) {
+    public Pessoa(int id, String nome, String sobrenome, String dataNascimento, boolean ativo) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = dataNascimento;
+        this.ativo = ativo;
     }
 
     public Pessoa(Parcel input) {
@@ -42,6 +45,7 @@ public class Pessoa implements Parcelable {
         this.nome = input.readString();
         this.sobrenome = input.readString();
         this.dataNascimento = input.readString();
+        this.ativo = (input.readInt() == 0) ? false : true;
     }
 
     public int getId() {
@@ -76,6 +80,13 @@ public class Pessoa implements Parcelable {
         this.dataNascimento = dataNascimento;
     }
 
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
 
     @Override
     public int describeContents() {
@@ -88,6 +99,7 @@ public class Pessoa implements Parcelable {
         dest.writeString(this.nome);
         dest.writeString(this.sobrenome);
         dest.writeString(this.dataNascimento);
+        dest.writeInt(this.ativo == false ? 0 : 1);
     }
 
     public static final Creator<Pessoa> CREATOR = new Creator<Pessoa>() {
