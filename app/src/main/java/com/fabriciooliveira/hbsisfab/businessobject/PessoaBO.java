@@ -30,4 +30,8 @@ public class PessoaBO {
         mPessoaDB.deletarDadosDoBanco();
     }
 
+    public void atualizarPessoaPorID(Pessoa pessoa) {
+        mPessoaDB.atualizarPessoaPorID(pessoa);
+    }
+
 }

@@ -81,4 +81,16 @@ public class PessoaDB extends SQLiteOpenHelper {
         db.delete("TB_PESSOA", null, null);
     }
 
+    public void atualizarPessoaPorID(Pessoa pessoa){
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("NOME", pessoa.getNome());
+        values.put("SOBRENOME", pessoa.getSobrenome());
+        values.put("DATA_NASCIMENTO", pessoa.getDataNascimento());
+        values.put("ATIVO", pessoa.isAtivo() ? 1 : 0);
+
+        db.update("TB_PESSOA", values, "NOME=?", new String[]{pessoa.getNome()});
+    }
+
 }

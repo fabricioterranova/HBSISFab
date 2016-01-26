@@ -26,4 +26,11 @@ public class DateHelper {
         }
         return null;
     }
+
+    public static String getLongDate(long longValue) {
+        Date date=new Date(longValue);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        return simpleDateFormat.format(date);
+    }
 }
