@@ -3,6 +3,7 @@
 
     <!-- Menu Na MainActivity -->
     <string name="menu_backup">Backup</string>
+    <string name="menu_sair">Sair</string>
 
     <string name="sair">Sair</string>
     <string name="sim">Sim</string>

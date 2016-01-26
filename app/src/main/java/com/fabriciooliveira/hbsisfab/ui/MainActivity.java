@@ -3,11 +3,16 @@ package com.fabriciooliveira.hbsisfab.ui;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 
 import com.fabriciooliveira.hbsisfab.R;
@@ -16,7 +21,12 @@ import com.fabriciooliveira.hbsisfab.businessobject.PessoaBO;
 import com.fabriciooliveira.hbsisfab.model.Pessoa;
 import com.fabriciooliveira.hbsisfab.util.Constants;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -84,5 +94,51 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                     }
                 }).setNegativeButton(getString(R.string.nao), null).show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.menu_backup:
+                try {
+                    copiarDatabaseParaPastaDownload();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.menu_sair:
+                finish();
+        }
+        return true;
+    }
+
+    public void copiarDatabaseParaPastaDownload() throws IOException {
+        try {
+            StringBuilder builder = new StringBuilder();
+            builder.append("backup_avaliacao_").append(String.valueOf(new Date())).append(".bkp");
+            File backupDB = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), builder.toString());
+            File currentDB = getApplicationContext().getDatabasePath(Constants.DB_NAME);
+            if (currentDB.exists()) {
+                FileInputStream fis = new FileInputStream(currentDB);
+                FileOutputStream fos = new FileOutputStream(backupDB);
+                fos.getChannel().transferFrom(fis.getChannel(), 0, fis.getChannel().size());
+                fis.close();
+                fos.close();
+                Log.i("Database successfully", " copied to download folder");
+                Toast.makeText(MainActivity.this, "Banco de Dados copiado com sucesso", Toast.LENGTH_SHORT).show();
+
+            } else Log.i("Copying Database", " fail, database not found");
+        } catch (IOException e) {
+            Log.d("Copying Database", "fail, reason:", e);
+        }
     }
 }
