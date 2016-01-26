@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:clickable="false"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardElevation="3dp"
+    card_view:cardUseCompatPadding="false"
+    card_view:cardPreventCornerOverlap="true"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pessoa_nome"
+            android:id="@+id/titulo_nome"
+            android:textSize="@dimen/tamanho_texto_celula_pessoa"
+            android:layout_marginBottom="@dimen/margin_bottom_celula_pessoa"/>
+
+        <TextView
+            android:id="@+id/pessoa_nome"
+            android:text="Fabricio Oliveira"
+            android:layout_toRightOf="@id/titulo_nome"
+            style="@style/celula_pessoa"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pessoa_nascimento"
+            android:textSize="@dimen/tamanho_texto_celula_pessoa"
+            android:id="@+id/titulo_nascimento"
+            android:layout_below="@id/titulo_nome"/>
+
+        <TextView
+            android:id="@+id/pessoa_nascimento"
+            android:text="04/04/1900"
+            android:layout_below="@id/titulo_nome"
+            android:layout_toRightOf="@id/titulo_nascimento"
+            style="@style/celula_pessoa"
+            />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

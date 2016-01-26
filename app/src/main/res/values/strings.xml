@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">HBSISFab</string>
+
+    <!-- Menu Na MainActivity -->
+    <string name="menu_backup">Backup</string>
+
+    <string name="sair">Sair</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="deseja_sair">Deseja sair?</string>
+
+
+    <string name="pessoa_nome">Nome: </string>
+    <string name="pessoa_nascimento">Nasc: </string>
+
+</resources>
